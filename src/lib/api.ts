@@ -1,8 +1,9 @@
 import { FormSchema } from "@/hooks/use-questions-form";
 
-const API_BASE_URL = "http://localhost:3000/api";
+// const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL = "https://image-magic-rust.vercel.app/api";
 
-export type ServerResponse<T> = T | { error: string };
+export type ServerResponse<T> = T | { error: string };g
 
 export type ApiResponse<T> =
   | { success: true; data: T }

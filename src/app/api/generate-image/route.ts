@@ -28,6 +28,8 @@ export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ 
 
     const generatedImage = result.data[0].url!;
 
+    console.log("Generated image URL:", generatedImage);
+
     return NextResponse.json({ image: generatedImage }, { status: 200 });
   } catch (error) {
     console.error("Error in /api/generate-image:", error);
