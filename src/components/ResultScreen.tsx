@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 interface ResultScreenProps {
@@ -14,13 +13,11 @@ const ResultScreen = ({ generatedImage, onStartOver }: ResultScreenProps) => {
       </h1>
 
       <div className="w-full max-w-2xl mb-8">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element  */}
+        <img
           src={generatedImage}
           alt="T-shirt mockup"
-          width={672}
-          height={672}
-          className="rounded-lg shadow-md object-contain"
-          priority
+          className="h-[672px] w-[672px] rounded-lg shadow-md object-contain"
         />
       </div>
 
