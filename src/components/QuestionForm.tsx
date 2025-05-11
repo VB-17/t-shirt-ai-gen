@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import ProgressBar from "@/components/ProgressBar";
-import { useQuestionsForm } from "@/hooks/use-questions-form";
+import { FormSchema, useQuestionsForm } from "@/hooks/use-questions-form";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import RadioGroupWithOther from "./RadioGroupWithOther";
 import { AppState } from "./TShirtDesigner";
@@ -15,7 +15,7 @@ import { AppState } from "./TShirtDesigner";
 interface QuestionFormProps {
   setAppState?: (type: AppState) => void;
   onBack: () => void;
-  onHandleComplete: () => Promise<void>
+  onHandleComplete: (values: FormSchema) => Promise<void>
 }
 
 const QuestionForm = ({ onHandleComplete, onBack }: QuestionFormProps) => {
@@ -49,7 +49,7 @@ const QuestionForm = ({ onHandleComplete, onBack }: QuestionFormProps) => {
         setIsAnimating(false);
       }, 300);
     } else {
-      await onHandleComplete();
+      await onHandleComplete(form.getValues());
     }
   };
 

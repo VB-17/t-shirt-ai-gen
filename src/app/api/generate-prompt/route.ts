@@ -37,45 +37,35 @@ export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ 
 
     const response = await client.responses.create({
       model: "gpt-4.1",
-      input: `You are an expert prompt engineer specializing in image generation. Based on the user's answers to 13 design-related questions, generate a highly descriptive, specific, and professional prompt intended for creating a T-shirt design image.
-
-      The final output should depict a white T-shirt **fully laid flat and facing the viewer**, with realistic fabric texture, soft shadows, and natural lighting. The design must appear **accurately printed** on the T-shirt in the exact position described, blending naturally with the folds and contours of the fabric. This is not a digital layout mockup—imagine a real photo of a white T-shirt with the artwork applied.
-      
-      Integrate all the relevant details from the user's input, including:
-      - Motif and its action or pose
-      - Scene and setting
-      - Additional artistic elements
-      - Art style (e.g., watercolor, cyberpunk, line art)
-      - Composition (e.g., centered, minimal, full-width)
-      - Color palette (specific colors or tones)
-      - Vibe and mood
-      - T-shirt design shape (e.g., circular, rectangular, irregular)
-      - Placement details (provided below)
-      - Target audience (style and tone should match)
-      
-      Avoid vague or generic phrases. Be precise and rich in detail. Ensure the description reads like a professional brief for an image-generation model (e.g., Midjourney, DALL·E, etc.).
-      
-      User Answers:
-      1. Motif: ${answers.motif}
-      2. Motif Action: ${answers.motifAction}
-      3. Scene: ${answers.scene}
-      4. Additional Elements: ${answers.additionalElements}
-      5. Art Style: ${answers.artStyle}
-      6. Composition: ${answers.composition}
-      7. Color Palette: ${answers.colorPalette}
-      8. Vibe: ${answers.vibe}
-      9. Mood: ${answers.mood}
-      10. Placement: ${answers.placement}
-      11. Shape: ${answers.shape}
-      12. Decorations: ${answers.decorations}
-      13. Target Audience: ${answers.targetAudience}
-      
-      Placement instructions: The design must be ${placementInstruction}, printed cleanly and proportionally on the white T-shirt.
-      
-      Return only the final image-generation prompt as a single formatted string, no explanation or surrounding text.
-      `
+      input: `You are an expert prompt engineer specializing in photorealistic image generation for merchandise. Create a detailed and specific image-generation prompt for a T-shirt design based on the user’s responses. 
+    
+    The output must always be a **high-resolution photorealistic image** of a **plain white T-shirt**, completely **laid flat on a neutral light gray or off-white studio background**, with **soft, natural lighting and visible fabric texture** (such as cotton wrinkles and folds). 
+    
+    **The T-shirt must face the viewer directly**, centered in the image, and there must be **nothing else visible—no models, no props, no background clutter**. 
+    
+    The design must appear **directly printed on the T-shirt**, conforming to the **natural folds, shadows, and contours of the fabric**, and must be placed **exactly** according to the user’s placement instructions. The print should **blend seamlessly** as if screen-printed or DTG-printed on the fabric. 
+    
+    The design should match all 13 user-specified elements below. Avoid vague terms. Use concrete visual language. This is not a mockup. The result must look like a professional studio photograph of a real printed T-shirt.
+    
+    User Answers:
+    1. Motif: ${answers.motif}
+    2. Motif Action: ${answers.motifAction}
+    3. Scene: ${answers.scene}
+    4. Additional Elements: ${answers.additionalElements}
+    5. Art Style: ${answers.artStyle}
+    6. Composition: ${answers.composition}
+    7. Color Palette: ${answers.colorPalette}
+    8. Vibe: ${answers.vibe}
+    9. Mood: ${answers.mood}
+    10. Placement: ${answers.placement}
+    11. Shape: ${answers.shape}
+    12. Decorations: ${answers.decorations}
+    13. Target Audience: ${answers.targetAudience}
+    
+    Placement instructions: The design must be ${placementInstruction}, precisely proportioned and aligned as if screen-printed onto the laid-flat white T-shirt.
+    
+    Return only the final prompt as a cleanly formatted string. Do not return explanations, JSON, or metadata—just the prompt string for the image generation model.`
     });
-
     const generatedResponse = response.output_text;
 
     console.log({ generatedResponse })

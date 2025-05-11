@@ -7,7 +7,7 @@ import WelcomeScreen from "@/components/WelcomeScreen";
 import QuestionForm from "@/components/QuestionForm";
 import LoadingScreen from "@/components/LoadingScreen";
 import ResultScreen from "@/components/ResultScreen";
-import { useQuestionsForm } from "@/hooks/use-questions-form";
+import { FormSchema, useQuestionsForm } from "@/hooks/use-questions-form";
 import { ApiService } from "@/lib/api";
 
 export type AppState = "welcome" | "questions" | "loading" | "result";
@@ -34,11 +34,10 @@ const Index = () => {
     setAppState("welcome");
   };
 
-  const handleComplete = async () => {
+  const handleComplete = async (values: FormSchema) => {
     setAppState("loading");
 
     try {
-      const values = form.getValues();
       const result: { prompt?: string; image?: string; error?: string } = {};
 
       const promptResponse = await ApiService.generatePrompt(values);
@@ -48,7 +47,6 @@ const Index = () => {
       }
 
       result.prompt = promptResponse.data.prompt;
-
 
       const imageResponse = await ApiService.generateImage(result.prompt);
 
