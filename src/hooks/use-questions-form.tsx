@@ -133,21 +133,6 @@ export interface Question {
   options?: string[];
 }
 
-export const defaultFormValues: FormSchema = {
-  motif: "夜の街",
-  motifAction: "ネオンが光っている",
-  scene: "サイバーパンクな都市",
-  additionalElements: "未来的な車",
-  artStyle: "写実的",
-  composition: "中央に配置",
-  colorPalette: "寒色系",
-  vibe: "クール",
-  mood: "孤独感",
-  placement: "胸の中央",
-  shape: "縦長（ポートレート）",
-  decorations: "なし",
-  targetAudience: "誰でも",
-};
 
 
 
@@ -172,7 +157,21 @@ export type FormSchema = z.infer<typeof formSchema>;
 export const useQuestionsForm = () => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultFormValues,
+    defaultValues: {
+      motif: "",
+      motifAction: "",
+      scene: "",
+      additionalElements: "",
+      artStyle: "",
+      composition: "",
+      colorPalette: "",
+      vibe: "",
+      mood: "",
+      placement: "",
+      shape: "",
+      decorations: "",
+      targetAudience: "",
+    },
     mode: "onChange",
   });
 
