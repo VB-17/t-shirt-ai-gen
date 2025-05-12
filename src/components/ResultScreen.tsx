@@ -9,14 +9,14 @@ const ResultScreen = ({ generatedImage, onStartOver }: ResultScreenProps) => {
   return (
     <div className="flex flex-col items-center justify-center animate-fade-in">
       <h1 className="text-3xl font-bold mb-6 text-center text-tshirt-text">
-        Your T-Shirt Design
+        あなたのTシャツデザイン
       </h1>
 
       <div className="w-full max-w-2xl mb-8">
         {/* eslint-disable-next-line @next/next/no-img-element  */}
         <img
           src={generatedImage}
-          alt="T-shirt mockup"
+          alt="Tシャツのモックアップ"
           className="h-[672px] w-[672px] rounded-lg shadow-md object-contain"
         />
       </div>
@@ -27,7 +27,7 @@ const ResultScreen = ({ generatedImage, onStartOver }: ResultScreenProps) => {
           variant="outline"
           className="border-tshirt-border hover:bg-tshirt-lightgray text-tshirt-text px-6"
         >
-          Start Over
+          最初からやり直す
         </Button>
       </div>
     </div>

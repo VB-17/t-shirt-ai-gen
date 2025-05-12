@@ -1,7 +1,6 @@
 // components/WelcomeScreen.tsx
 import { Button } from "@/components/ui/button";
 
-
 type WelcomeScreenProps = {
   onStart: () => void;
 }
@@ -10,10 +9,10 @@ const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
   return (
     <div className="flex flex-col items-center justify-center animate-in fade-in duration-300">
       <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center text-gray-900">
-        Design Your Custom T-Shirt
+        あなただけのカスタムTシャツをデザインしよう
       </h1>
       <p className="text-lg md:text-xl text-gray-600 text-center max-w-lg mb-10">
-        Answer a few questions to generate a unique T-shirt design with AI
+        AIを使って、いくつかの質問に答えるだけでユニークなTシャツデザインを作成できます
       </p>
 
       <div className="mb-8 w-64 h-64 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -37,7 +36,7 @@ const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
         onClick={onStart}
         className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 rounded-md text-lg font-medium transition-all"
       >
-        Start Designing
+        デザインを始める
       </Button>
 
     </div>

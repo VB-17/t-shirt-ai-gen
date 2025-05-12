@@ -1,4 +1,3 @@
-
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { Sparkles } from "lucide-react";
 
@@ -12,24 +11,24 @@ const LoadingScreen = () => {
         </div>
       </div>
       <h2 className="text-2xl font-semibold mb-2 text-center text-tshirt-text">
-        Generating your T-shirt design...
+        あなたのTシャツデザインを生成中...
       </h2>
       <p className="text-md text-tshirt-text/70 text-center max-w-md animate-pulse-gentle">
-        Our AI is creating a unique design based on your preferences. This may take a few moments.
+        AIがあなたの好みに基づいてユニークなデザインを作成しています。少々お待ちください。
       </p>
 
       <div className="mt-8 flex flex-col gap-2 w-full max-w-md">
         <div className="flex items-center gap-3">
           <div className="h-2 w-2 rounded-full bg-tshirt-accent"></div>
-          <p className="text-sm text-tshirt-text/60">Analyzing your preferences</p>
+          <p className="text-sm text-tshirt-text/60">あなたの好みを分析中</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="h-2 w-2 rounded-full bg-tshirt-accent"></div>
-          <p className="text-sm text-tshirt-text/60">Creating unique artwork</p>
+          <p className="text-sm text-tshirt-text/60">ユニークなアートワークを作成中</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="h-2 w-2 rounded-full bg-tshirt-accent"></div>
-          <p className="text-sm text-tshirt-text/60">Applying to t-shirt template</p>
+          <p className="text-sm text-tshirt-text/60">Tシャツテンプレートに適用中</p>
         </div>
       </div>
     </div>

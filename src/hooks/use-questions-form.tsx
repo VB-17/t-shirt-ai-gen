@@ -135,22 +135,22 @@ export interface Question {
 
 
 
-
 export const formSchema = z.object({
-  motif: z.string().min(1, "Please enter a motif or theme."),
-  motifAction: z.string().min(1, "Please describe what the motif is doing."),
-  scene: z.string().min(1, "Please specify where the scene is happening."),
-  additionalElements: z.string().min(1, "Please describe any additional elements."),
-  artStyle: z.string().min(1, "Please select or specify an art style."),
-  composition: z.string().min(1, "Please describe the composition."),
-  colorPalette: z.string().min(1, "Please select or specify a color palette."),
-  vibe: z.string().min(1, "Please select a vibe."),
-  mood: z.string().min(1, "Please describe the mood or emotion."),
-  placement: z.string().min(1, "Please select a placement option."),
-  shape: z.string().min(1, "Please select a shape option."),
-  decorations: z.string().min(1, "Please describe any decorations or effects."),
-  targetAudience: z.string().min(1, "Please specify the target audience."),
+  motif: z.string().min(1, "モチーフやテーマを入力してください。"),
+  motifAction: z.string().min(1, "モチーフが何をしているかを説明してください。"),
+  scene: z.string().min(1, "シーンがどこで行われているかを指定してください。"),
+  additionalElements: z.string().min(1, "追加の要素について説明してください。"),
+  artStyle: z.string().min(1, "アートスタイルを選択または指定してください。"),
+  composition: z.string().min(1, "構図について説明してください。"),
+  colorPalette: z.string().min(1, "カラーパレットを選択または指定してください。"),
+  vibe: z.string().min(1, "雰囲気を選択してください。"),
+  mood: z.string().min(1, "気分や感情を説明してください。"),
+  placement: z.string().min(1, "配置オプションを選択してください。"),
+  shape: z.string().min(1, "形状オプションを選択してください。"),
+  decorations: z.string().min(1, "装飾や効果について説明してください。"),
+  targetAudience: z.string().min(1, "対象となる視聴者を指定してください。"),
 });
+
 
 export type FormSchema = z.infer<typeof formSchema>;
 
