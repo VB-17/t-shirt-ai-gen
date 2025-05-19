@@ -42,8 +42,6 @@ const WelcomeScreen = ({ onStart, onBulkSubmit }: WelcomeScreenProps) => {
     }
   };
 
-
-
   return (
     <div className="flex">
       <div className="flex flex-col items-center justify-center animate-in fade-in duration-300 pr-8 border-r">

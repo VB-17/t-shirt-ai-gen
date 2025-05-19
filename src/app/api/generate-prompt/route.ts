@@ -14,7 +14,6 @@ export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ 
 
     console.log({ answers })
 
-
     if (!answers || Object.keys(answers).length !== 13) {
       return NextResponse.json({ error: "Invalid input: All 13 answers are required" }, { status: 400 });
     }
@@ -22,30 +21,31 @@ export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ 
     let placementInstruction = "";
     switch (answers.placement) {
       case "胸の中央":
-        placementInstruction = "printed prominently on the center of the chest";
+        placementInstruction = "designed to be printed prominently on the center of the chest";
         break;
       case "ポケットの位置":
-        placementInstruction = "printed in a smaller size near the pocket area on the right chest";
+        placementInstruction = "designed to be printed in a smaller size near the pocket area on the right chest";
         break;
       case "全面印刷（Tシャツ全体に広がる）":
-        placementInstruction = "printed across the entire front of the T-shirt, covering most of the surface";
+        placementInstruction = "designed to be printed across the entire front of the T-shirt, covering most of the surface";
         break;
       default:
         return NextResponse.json({ error: "Invalid placement value" }, { status: 400 });
     }
 
-
     const response = await client.responses.create({
       model: "gpt-4.1",
       input: `You are an expert prompt engineer specializing in photorealistic image generation for merchandise. Create a detailed and specific image-generation prompt for a T-shirt design based on the user’s responses. 
     
-    The output must always be a **high-resolution photorealistic image** of a **plain white T-shirt**, completely **laid flat on a neutral light gray or off-white studio background**, with **soft, natural lighting and visible fabric texture** (such as cotton wrinkles and folds). 
+    The output must be a **high-resolution, photorealistic digital artwork** of the **T-shirt design only**, presented on a **completely transparent background**. The image must consist **solely of the design itself**, with **no T-shirt, no fabric texture, no human models, no mockups, no overlays, no props, and no background**—**only the isolated design** as if exported directly from a professional design software. It must be perfectly centered, sharp, clean, and ready for professional screen-printing or DTG-printing.
     
-    **The T-shirt must face the viewer directly**, centered in the image, and there must be **nothing else visible—no models, no props, no background clutter**. 
+    This image will be used for production purposes and must be:
+    - **Crisp, detailed, and vivid**
+    - **Accurately shaped and proportioned** for its specified placement on a T-shirt
+    - **Without any outer shadows, borders, or artifacts**
+    - Fully compliant with print shop specifications
     
-    The design must appear **directly printed on the T-shirt**, conforming to the **natural folds, shadows, and contours of the fabric**, and must be placed **exactly** according to the user’s placement instructions. The print should **blend seamlessly** as if screen-printed or DTG-printed on the fabric. 
-    
-    The design should match all 13 user-specified elements below. Avoid vague terms. Use concrete visual language. This is not a mockup. The result must look like a professional studio photograph of a real printed T-shirt.
+    The design must reflect all 13 user-specified elements below with precision. Avoid vagueness. Use highly specific visual language. The result should look like a finalized, production-ready artwork.
     
     User Answers:
     1. Motif: ${answers.motif}
@@ -62,10 +62,12 @@ export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ 
     12. Decorations: ${answers.decorations}
     13. Target Audience: ${answers.targetAudience}
     
-    Placement instructions: The design must be ${placementInstruction}, precisely proportioned and aligned as if screen-printed onto the laid-flat white T-shirt.
+    Placement instructions: The design must be ${placementInstruction}, perfectly centered and dimensioned as if directly exported for print—**do not render it on or over a T-shirt**.
     
     Return only the final prompt as a cleanly formatted string. Do not return explanations, JSON, or metadata—just the prompt string for the image generation model.`
     });
+
+
     const generatedResponse = response.output_text;
 
     console.log({ generatedResponse })
@@ -75,4 +77,3 @@ export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ 
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
-

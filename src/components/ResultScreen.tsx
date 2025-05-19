@@ -25,7 +25,7 @@ const ResultScreen = ({ generatedImage, onStartOver }: ResultScreenProps) => {
         <Button
           onClick={onStartOver}
           variant="outline"
-          className="border-tshirt-border hover:bg-tshirt-lightgray text-tshirt-text px-6"
+          className="cursor-pointer border-tshirt-border hover:bg-tshirt-lightgray text-tshirt-text px-6"
         >
           最初からやり直す
         </Button>
