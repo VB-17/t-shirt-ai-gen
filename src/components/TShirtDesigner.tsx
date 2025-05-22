@@ -15,7 +15,7 @@ export type AppState = "welcome" | "questions" | "loading" | "result";
 
 const Index = () => {
   const [appState, setAppState] = useState<AppState>("welcome");
-  const [generatedImage, setGeneratedImage] = useState<string>("");
+  const [generatedImages, setGeneratedImages] = useState<string[]>([]);
 
   const { form } = useQuestionsForm();
 
@@ -38,7 +38,7 @@ const Index = () => {
     setAppState("loading");
 
     try {
-      const result: { prompt?: string; image?: string; error?: string } = {};
+      const result: { prompts?: string[]; images?: string[]; error?: string } = {};
 
       const promptResponse = await ApiService.generatePrompt(values);
 
@@ -46,17 +46,17 @@ const Index = () => {
         throw new Error(promptResponse.error || "Failed to generate prompt");
       }
 
-      result.prompt = promptResponse.data.prompt;
+      result.prompts = promptResponse.data.prompts;
 
-      const imageResponse = await ApiService.generateImage(result.prompt);
+      const imageResponse = await ApiService.generateImage(result.prompts);
 
       if (!imageResponse.success) {
         throw new Error(imageResponse.error || "Failed to generate image");
       }
 
-      result.image = imageResponse.data.image;
+      result.images = imageResponse.data.images;
 
-      setGeneratedImage(result.image);
+      setGeneratedImages(result.images);
       setAppState("result");
     } catch (error) {
       console.error("Error in handleComplete:", error);
@@ -80,8 +80,8 @@ const Index = () => {
           <LoadingScreen />
         )}
 
-        {(appState === "result" && generatedImage != "") && (
-          <ResultScreen generatedImage={generatedImage} onStartOver={handleStartOver} />
+        {(appState === "result" && generatedImages.length != 0) && (
+          <ResultScreen generatedImages={generatedImages} onStartOver={handleStartOver} />
         )}
       </div>
     </div>

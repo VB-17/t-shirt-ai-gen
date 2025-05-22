@@ -7,28 +7,38 @@ const client = new OpenAI({
 });
 
 
-export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ image: string }>>> {
+export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ images: string[] }>>> {
   try {
-    const { prompt } = await req.json();
+    const { prompts } = await req.json();
 
-    if (!prompt) {
-      return NextResponse.json({ error: "Invalid input: Prompt is required" }, { status: 400 });
+    if (!prompts) {
+      return NextResponse.json({ error: "Invalid input: Prompts is required" }, { status: 400 });
     }
 
 
-    const result = await client.images.generate({
-      model: "gpt-image-1",
-      prompt
-    });
+    const generatedImages: string[] = [];
 
-    if (!result.data || result.data.length === 0) {
-      return NextResponse.json({ error: "Image generation failed" }, { status: 400 });
+
+
+    for (const prompt of prompts) {
+      const result = await client.images.generate({
+        model: "gpt-image-1",
+        prompt,
+
+      });
+
+      if (!result.data || result.data.length === 0) {
+        return NextResponse.json({ error: "Image generation failed" }, { status: 400 });
+      }
+
+      const image_b64 = result.data[0].b64_json!;
+
+      generatedImages.push(image_b64);
     }
 
-    const generatedImage = result.data[0].b64_json!;
-    console.log("Generated image URL:", generatedImage);
 
-    return NextResponse.json({ image: generatedImage }, { status: 200 });
+
+    return NextResponse.json({ images: generatedImages }, { status: 200 });
   } catch (error) {
     console.error("Error in /api/generate-image:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

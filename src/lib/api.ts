@@ -1,7 +1,7 @@
 import { FormSchema } from "@/hooks/use-questions-form";
 
-// export const API_BASE_URL = "http://localhost:3000/api";
-const API_BASE_URL = "https://image-magic-rust.vercel.app/api";
+export const API_BASE_URL = "http://localhost:3000/api";
+// const API_BASE_URL = "https://image-magic-rust.vercel.app/api";
 
 export type ServerResponse<T> = T | { error: string };
 
@@ -77,16 +77,16 @@ async function request<T>(
 
 export const ApiService = {
   generatePrompt: async (data: FormSchema) => {
-    return await request<{ prompt: string }>("/generate-prompt", {
+    return await request<{ prompts: string[] }>("/generate-prompt", {
       method: "POST",
       body: data,
     });
   },
 
-  generateImage: async (prompt: string) => {
-    return await request<{ image: string }>("/generate-image", {
+  generateImage: async (prompts: string[]) => {
+    return await request<{ images: string[] }>("/generate-image", {
       method: "POST",
-      body: { prompt },
+      body: { prompts },
     });
   }
 
