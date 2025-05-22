@@ -7,6 +7,9 @@ const client = new OpenAI({
 });
 
 
+export const maxDuration = 300;
+
+
 export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ images: string[] }>>> {
   try {
     const { prompts } = await req.json();
