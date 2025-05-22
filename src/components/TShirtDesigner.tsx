@@ -65,10 +65,6 @@ const Index = () => {
     }
   };
 
-
-
-
-
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 p-4 sm:p-6">
       <div className="w-full max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-sm">

@@ -17,7 +17,7 @@ export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ 
 
 
     const result = await client.images.generate({
-      model: "dall-e-3",
+      model: "gpt-image-1",
       prompt
     });
 
@@ -25,9 +25,7 @@ export async function POST(req: Request): Promise<NextResponse<ServerResponse<{ 
       return NextResponse.json({ error: "Image generation failed" }, { status: 400 });
     }
 
-
-    const generatedImage = result.data[0].url!;
-
+    const generatedImage = result.data[0].b64_json!;
     console.log("Generated image URL:", generatedImage);
 
     return NextResponse.json({ image: generatedImage }, { status: 200 });

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import TShirtDesignOverlay from "./TShirtDesignOverlay";
 
 interface ResultScreenProps {
   generatedImage: string;
@@ -12,13 +13,18 @@ const ResultScreen = ({ generatedImage, onStartOver }: ResultScreenProps) => {
         あなたのTシャツデザイン
       </h1>
 
-      <div className="w-full max-w-2xl mb-8">
+      <div className="w-full max-w-2xl mb-8 space-y-10">
         {/* eslint-disable-next-line @next/next/no-img-element  */}
-        <img
-          src={generatedImage}
-          alt="Tシャツのモックアップ"
-          className="h-[672px] w-[672px] rounded-lg shadow-md object-contain"
+        <TShirtDesignOverlay
+          designUrl={`data:image/png;base64,${generatedImage}`}
         />
+
+        <img
+          src={`data:image/png;base64,${generatedImage}`}
+          alt="t-shirt design"
+          className="size-[400px] h-full w-fulll"
+        />
+
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 mb-8">

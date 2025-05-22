@@ -2,27 +2,44 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+export type QuestionID =
+  | "motif"
+  | "motifAction"
+  | "scene"
+  | "additionalElements"
+  | "artStyle"
+  | "composition"
+  | "colorPalette"
+  | "vibe"
+  | "mood"
+  | "otherDetails";
 
+export interface Question {
+  id: QuestionID;
+  text: string;
+  type: "text" | "radio" | "textarea";
+  options?: string[];
+}
 
 export const questions: Question[] = [
   {
     id: "motif",
-    text: "Tシャツにプリントしたい主なモチーフやテーマは何ですか？",
+    text: "Tシャツにプリントしたい主なモチーフやテーマは何ですか？（例：ネコ、サムライ、ロボット、街の風景、抽象画 など）",
     type: "text",
   },
   {
     id: "motifAction",
-    text: "そのモチーフは何をしていますか？",
+    text: "そのモチーフは何をしていますか？（例：歩いている、寝ている、空を飛んでいる、光っている など）",
     type: "text",
   },
   {
     id: "scene",
-    text: "そのシーンはどこで起きていますか？",
+    text: "そのシーンはどこで起きていますか？（例：宇宙、砂漠、教室、サイバーパンク都市 など）",
     type: "text",
   },
   {
     id: "additionalElements",
-    text: "画像に一緒に描かれていてほしいものはありますか？",
+    text: "画像に一緒に描かれていてほしいものはありますか？（例：人、看板、車、動物、建物 など）",
     type: "textarea",
   },
   {
@@ -42,7 +59,7 @@ export const questions: Question[] = [
   },
   {
     id: "composition",
-    text: "構図のイメージはありますか？",
+    text: "構図のイメージはありますか？（例：中央に配置、遠景、上下に分かれる構成、俯瞰視点など）",
     type: "text",
   },
   {
@@ -74,66 +91,15 @@ export const questions: Question[] = [
   },
   {
     id: "mood",
-    text: "その画像に漂っていてほしい「空気感」や「感情」を言葉で表してください。",
+    text: "その画像に漂っていてほしい「空気感」や「感情」を言葉で表してください。（例：ノスタルジック、圧倒的、癒し系、緊張感、孤独感 など）",
     type: "text",
   },
   {
-    id: "placement",
-    text: "Tシャツのどこにプリントされている想定ですか？",
-    type: "radio",
-    options: [
-      "胸の中央",
-      "ポケットの位置",
-      "全面印刷（Tシャツ全体に広がる）",
-    ],
-  },
-  {
-    id: "shape",
-    text: "希望する画像の形はありますか？",
-    type: "radio",
-    options: [
-      "正方形",
-      "縦長（ポートレート）",
-      "横長（ランドスケープ）",
-      "特に指定なし",
-    ],
-  },
-  {
-    id: "decorations",
-    text: "装飾や枠線、特殊なエフェクトは必要ですか？",
+    id: "otherDetails",
+    text: "その他、デザインに関して伝えたいことがあれば自由にご記入ください",
     type: "textarea",
   },
-  {
-    id: "targetAudience",
-    text: "このTシャツは誰に着てほしいですか？",
-    type: "text",
-  },
 ] as const;
-
-
-type QuestionID =
-  | "motif"
-  | "motifAction"
-  | "scene"
-  | "additionalElements"
-  | "artStyle"
-  | "composition"
-  | "colorPalette"
-  | "vibe"
-  | "mood"
-  | "placement"
-  | "shape"
-  | "decorations"
-  | "targetAudience";
-
-export interface Question {
-  id: QuestionID;
-  text: string;
-  type: "text" | "radio" | "textarea";
-  options?: string[];
-}
-
-
 
 export const formSchema = z.object({
   motif: z.string().min(1, "モチーフやテーマを入力してください。"),
@@ -145,12 +111,8 @@ export const formSchema = z.object({
   colorPalette: z.string().min(1, "カラーパレットを選択または指定してください。"),
   vibe: z.string().min(1, "雰囲気を選択してください。"),
   mood: z.string().min(1, "気分や感情を説明してください。"),
-  placement: z.string().min(1, "配置オプションを選択してください。"),
-  shape: z.string().min(1, "形状オプションを選択してください。"),
-  decorations: z.string().min(1, "装飾や効果について説明してください。"),
-  targetAudience: z.string().min(1, "対象となる視聴者を指定してください。"),
+  otherDetails: z.string().min(1, "その他のデザイン詳細を入力してください。"),
 });
-
 
 export type FormSchema = z.infer<typeof formSchema>;
 
@@ -167,10 +129,7 @@ export const useQuestionsForm = () => {
       colorPalette: "",
       vibe: "",
       mood: "",
-      placement: "",
-      shape: "",
-      decorations: "",
-      targetAudience: "",
+      otherDetails: "",
     },
     mode: "onChange",
   });
